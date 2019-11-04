@@ -1,0 +1,28 @@
+server:
+  port: 9527
+    
+spring:
+   application:
+    name: microservicecloud-zuul-gateway
+     
+eureka:
+ client: #客户端注册进eureka服务列表内
+   service-url: 
+     defaultZone: http://localhost:7001/eureka
+     #defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+ instance:
+   instance-id: gateway-9527.com
+   prefer-ip-address: true     #访问路径可以显示IP地址
+
+zuul: 
+  prefix: /rym
+  ignored-services: microservicecloud-dept #忽略原服务名访问，单个具体，多个可以用"*"
+  routes: 
+    mydept.serviceId: microservicecloud-dept
+    mydept.path: /mydept/**
+        
+info:
+  app.name: rym-microservicecloud
+  company.name: www.rym.com
+  build.artifactId: microservicecloud-zuul-gateway-9527
+  build.version: 0.0.1-SNAPSHOT
